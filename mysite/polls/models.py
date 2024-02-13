@@ -15,6 +15,8 @@ class Question(models.Model):
         return self.question_text + " REPR-Generated"
 
     def was_published_recently(self) -> bool:
+        if self.pub_date > timezone.now():
+            return False
         return self.pub_date >= (timezone.now() - datetime.timedelta(days=1))
 
 
